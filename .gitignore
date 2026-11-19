@@ -1,0 +1,10 @@
+# data and run outputs (never committed)
+data/
+metadata/
+logs/
+*.jsonl
+*.lock
+# python
+__pycache__/
+*.pyc
+.venv/

@@ -1,0 +1,19 @@
+torch>=2.6
+transformers>=5.0
+accelerate>=1.0
+huggingface_hub>=1.0
+datasets>=4.0
+pyarrow>=18
+Pillow>=11
+numpy>=2.0
+pandas>=2.2
+scipy>=1.14
+scikit-learn>=1.5
+requests>=2.32
+tqdm>=4.66
+sentencepiece
+protobuf
+safetensors
+# Generation only (greve/generate/generate.py). Needs a diffusers release that includes
+# ChromaPipeline, ZImagePipeline and Lumina2Pipeline (install from source if your release lacks them).
+diffusers

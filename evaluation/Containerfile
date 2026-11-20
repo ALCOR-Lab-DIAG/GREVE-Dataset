@@ -1,0 +1,14 @@
+# One image with the dependencies of all the detectors (first try; split it if two of them clash).
+#   podman build -t css-eval -f Containerfile .
+FROM docker.io/pytorch/pytorch:2.4.1-cuda12.4-cudnn9-runtime
+RUN apt-get update && apt-get install -y --no-install-recommends git git-lfs libgl1 libglib2.0-0 \
+    && git lfs install && rm -rf /var/lib/apt/lists/*
+RUN conda install -y -c conda-forge mpi4py openmpi && conda clean -afy
+RUN pip install --no-cache-dir "setuptools<75" gdown huggingface_hub pillow numpy scipy scikit-learn \
+    scikit-image opencv-python-headless imageio pyyaml ftfy regex "timm>=1.0.12" open_clip_torch \
+    "transformers>=4.42,<4.50" safetensors "albumentations<2" kornia pywavelets pytorch_wavelets einops \
+    yacs blobfile loralib efficientnet_pytorch tensorboard matplotlib seaborn pandas \
+    git+https://github.com/openai/CLIP.git
+# GAPL (LoRA via peft); a separate layer so the image above is reused
+RUN pip install --no-cache-dir "peft==0.14.0"
+WORKDIR /work

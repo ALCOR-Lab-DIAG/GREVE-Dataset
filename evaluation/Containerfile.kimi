@@ -1,0 +1,6 @@
+# Kimi-VL-A3B-Instruct: its remote code needs an older transformers than Qwen3-VL (PytorchGELUTanh).
+#   podman build -t css-vlm-kimi -f Containerfile.kimi .
+FROM docker.io/pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+RUN pip install --no-cache-dir "transformers==4.51.3" accelerate safetensors huggingface_hub pillow numpy \
+    timm einops sentencepiece tiktoken blobfile protobuf
+WORKDIR /work

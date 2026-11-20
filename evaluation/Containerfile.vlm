@@ -1,0 +1,8 @@
+# Image for the zero-shot VLM detectors (vlm_detect.py): recent transformers for Qwen3-VL / InternVL3.5.
+#   podman build -t css-vlm -f Containerfile.vlm .
+FROM docker.io/pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+RUN pip install --no-cache-dir "transformers==4.57.1" accelerate safetensors huggingface_hub pillow numpy \
+    timm einops sentencepiece tiktoken blobfile protobuf
+# MoE-JEPA (detectors.py:MoEJEPA) imports lightning, torchmetrics and scikit-learn
+RUN pip install --no-cache-dir lightning torchmetrics scikit-learn
+WORKDIR /work
